@@ -110,20 +110,24 @@ def get_standings():
     table_body = table[0].find('tbody')
     rows = table_body.find_all('tr')
     for row in rows:
+        team = row.find_all('a')[0].get('title')
         cols = row.find_all('td')
         cols = [ele.text.strip() for ele in cols]
         cols = [ele for ele in cols if ele]
         del cols[4:5]
+        cols.insert(0, team)
         east.append(cols)
 
     # west
     table_body = table[1].find('tbody')
     rows = table_body.find_all('tr')
     for row in rows:
+        team = row.find_all('a')[0].get('title')
         cols = row.find_all('td')
         cols = [ele.text.strip() for ele in cols]
         cols = [ele for ele in cols if ele]
         del cols[4:5]
+        cols.insert(0, team)
         west.append(cols)
 
     return [east, west]
